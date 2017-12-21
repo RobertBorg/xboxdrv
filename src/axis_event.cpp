@@ -28,6 +28,7 @@
 #include "uinput.hpp"
 
 #include "axisevent/abs_axis_event_handler.hpp"
+#include "axisevent/abs_auto_calibrating_axis_event_handler.hpp"
 #include "axisevent/key_axis_event_handler.hpp"
 #include "axisevent/rel_axis_event_handler.hpp"
 #include "axisevent/rel_repeat_axis_event_handler.hpp"
@@ -67,6 +68,10 @@ AxisEvent::from_string(const std::string& str)
   if (token == "abs")
   {
     ev.reset(new AxisEvent(AbsAxisEventHandler::from_string(rest)));
+  }
+  else if (token == "abs-auto")
+  {
+    ev.reset(new AxisEvent(AbsAutoCalibratingAxisEventHandler::from_string(rest)));
   }
   else if (token == "rel")
   {
